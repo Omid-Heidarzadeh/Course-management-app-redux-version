@@ -1,8 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './components/App.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
-function App() {
-  return <h1>Hi there.</h1>;
-}
-
-render(<App />, document.getElementById('root'));
+render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>,
+  document.getElementById('app')
+);
