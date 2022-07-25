@@ -10,6 +10,15 @@ function Header() {
         Home
       </NavLink>
       {' | '}
+      <NavLink
+        exact
+        to="/courses"
+        className="nav-link"
+        activeStyle={activeStyle}
+      >
+        Courses
+      </NavLink>
+      {' | '}
       <NavLink to="/about" className="nav-link" activeStyle={activeStyle}>
         About
       </NavLink>
