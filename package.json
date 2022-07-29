@@ -2,7 +2,10 @@
   "name": "react-and-redux",
   "description": "React and Redux project",
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.dev.js --port 3000"
+    "start": "run-p start:api dev-server",
+    "start:api": "node ./tools/apiServer.js",
+    "prestart:api": "node ./tools/createMockDb.js",
+    "dev-server": "webpack-dev-server --config ./webpack.config.dev.js --port 3000"
   },
   "dependencies": {
     "bootstrap": "4.3.1",
@@ -93,4 +96,3 @@
     "root": true
   }
 }
-
