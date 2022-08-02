@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { loadCourses } from '../../Redux/actions/courseActions';
 import { loadAuthors } from '../../Redux/actions/authorActions';
 import CourseList from './CourseList.jsx';
+import { Link } from 'react-router-dom';
 
 function CoursesPage(props) {
   const { authors, courses, loadCourses, loadAuthors } = props;
@@ -24,6 +25,9 @@ function CoursesPage(props) {
   return (
     <main>
       <h1>Courses</h1>
+      <Link to="/course" className="btn btn-primary">
+        Add Course
+      </Link>
       <CourseList courses={courses} />
     </main>
   );
