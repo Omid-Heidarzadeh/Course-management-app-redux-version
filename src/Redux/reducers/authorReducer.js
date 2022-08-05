@@ -6,6 +6,7 @@ export default function authorReducer(state = initalState.authors, action) {
     case types.LOAD_AUTHORS_SUCCESS: {
       return action.authors;
     }
+
     default:
       return state;
   }
