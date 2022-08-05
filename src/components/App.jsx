@@ -6,10 +6,11 @@ import Header from './common/Header.jsx';
 import PageNotFound from './404/PageNotFound.jsx';
 import CoursesPage from './courses/CoursesPage.jsx';
 import CourseManagementPage from './courses/CourseManagementPage.jsx';
+import './App.css';
 
 function App() {
   return (
-    <div className="container-fluid">
+    <div className="app-wrapper container-fluid d-flex flex-column">
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
