@@ -1,0 +1,23 @@
+.spinner {
+  margin: 60px auto;
+  font-size: 10px;
+  border: 10px solid #fff5bc;
+  border-top-color: orange;
+  animation: spin 1.5s infinite ease-in-out;
+}
+
+.spinner,
+.spinner::before {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
