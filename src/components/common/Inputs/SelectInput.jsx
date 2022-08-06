@@ -2,7 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function SelectInput(props) {
-  const { id, name, title, value, options, defaultOption, onChange } = props;
+  const {
+    id,
+    name,
+    title,
+    value,
+    options,
+    defaultOption,
+    onChange,
+    onBlur,
+    error,
+  } = props;
+
+  let inputClass = 'form-control';
+  if (error && error.length > 0) {
+    inputClass += ' is-invalid';
+  }
 
   return (
     <div className="form-group">
@@ -12,9 +27,10 @@ function SelectInput(props) {
       <select
         id={id}
         name={name}
-        className="form-control"
+        className={inputClass}
         value={value || ''}
         onChange={onChange}
+        onBlur={onBlur}
       >
         <option value="">{defaultOption}</option>
         {options.length &&
@@ -24,6 +40,7 @@ function SelectInput(props) {
             </option>
           ))}
       </select>
+      <span className="form-text text-danger pl-2">{error}</span>
     </div>
   );
 }
@@ -34,8 +51,10 @@ SelectInput.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   options: PropTypes.arrayOf(PropTypes.object),
+  error: PropTypes.string,
   defaultOption: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
 };
 
 export default SelectInput;

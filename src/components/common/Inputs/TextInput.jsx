@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TextInput(props) {
-  const { id, name, title, value, onChange, error = '' } = props;
+  const { id, name, title, value, onChange, onBlur, error = '' } = props;
   let inputClass = 'form-control';
   if (error && error.length > 0) {
     inputClass += ' is-invalid';
@@ -20,6 +20,7 @@ function TextInput(props) {
         className={inputClass}
         value={value || ''}
         onChange={onChange}
+        onBlur={onBlur}
       />
       <span className="form-text text-danger pl-2">{error}</span>
     </div>
@@ -32,6 +33,7 @@ TextInput.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   error: PropTypes.string,
 };
 

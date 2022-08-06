@@ -1,28 +1,25 @@
 import React, { useMemo } from 'react';
 import TextInput from '../common/Inputs/TextInput.jsx';
 import SelectInput from './../common/Inputs/SelectInput.jsx';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
 function CourseForm({
   course,
   authors,
   onChange,
   onSubmit,
+  onBlur,
   saving = false,
   errors = {},
 }) {
   return (
     <>
-      {Object.keys(errors).length === 0 ? null : (
+      {errors.onSave ? (
         <div role="alert" className="text-danger">
-          <p>Fix following erros:</p>
-          <ul>
-            {Object.entries(errors).map(([key, value]) => (
-              <li key={key}>{value}</li>
-            ))}
-          </ul>
+          <p>Fix following error and try again:</p>
+          <p>{errors.onSave}</p>
         </div>
-      )}
+      ) : null}
 
       <h1>{course.id ? 'Edit' : 'Add'} Course</h1>
 
@@ -33,6 +30,7 @@ function CourseForm({
           name="title"
           value={course.title}
           onChange={onChange}
+          onBlur={onBlur}
           error={errors.title}
         />
 
@@ -51,7 +49,8 @@ function CourseForm({
           )}
           defaultOption={'select author'}
           onChange={onChange}
-          error={errors.author}
+          onBlur={onBlur}
+          error={errors.authorId}
         />
 
         <TextInput
@@ -60,10 +59,15 @@ function CourseForm({
           name="category"
           value={course.category}
           onChange={onChange}
+          onBlur={onBlur}
           error={errors.category}
         />
 
-        <button className="btn btn-primary btn-m" type="submit">
+        <button
+          className="btn btn-primary btn-m"
+          disabled={saving}
+          type="submit"
+        >
           {saving ? 'Saving...' : 'Save'}
         </button>
       </form>
@@ -76,6 +80,7 @@ CourseForm.propTypes = {
   authors: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   saving: PropTypes.bool,
   errors: PropTypes.object,
 };
