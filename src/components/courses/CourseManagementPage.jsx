@@ -6,11 +6,18 @@ import { loadAuthors } from '../../Redux/actions/authorActions';
 import CourseForm from './CourseForm.jsx';
 import { newCourse } from '../../../tools/mockData';
 import Spinner from '../common/Spinner.jsx';
+import { toast } from 'react-toastify';
 
 const STATUS = {
   IDLE: 'IDLE',
   SUBMITTING: 'SUBMITTING',
   SUBMITTED: 'SUBMITTED',
+};
+
+const patterns = {
+  title: /^[a-zA-Z0-9 ()#+-]{3,30}$/,
+  authorId: /^([1-9]\d*)$/,
+  category: /^[a-zA-Z0-9 ()#+-]{1,30}$/,
 };
 
 function CourseManagementPage({
@@ -25,8 +32,11 @@ function CourseManagementPage({
   ...props
 }) {
   const [course, setCourse] = useState({ ...props.course });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(getErrors(course));
+  const [touched, setTouched] = useState({});
   const [status, setStatus] = useState(STATUS.IDLE);
+
+  const messages = getErrorMessages(errors);
   const slug = match.params.slug;
   // If courses are loaded but there is no matching course with current slug,
   // go to Add Course page and clear slug
@@ -49,17 +59,86 @@ function CourseManagementPage({
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setCourse((course) => ({
+
+    const newCourse = {
       ...course,
-      [name]: name.toLowerCase().endsWith('id') ? parseInt(value, 10) : value,
-    }));
+      [name]: Number(value) || value,
+    };
+    setCourse(newCourse);
+
+    const newErrors = getErrors(newCourse);
+    setErrors(() => {
+      const result = { ...newErrors };
+      return result;
+    });
+  }
+
+  function handleBlur(event) {
+    const { name } = event.target;
+    setTouched((touched) => ({ ...touched, [name]: true }));
+    setErrors(() => {
+      const result = { ...getErrors(course) };
+      return result;
+    });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    saveCourse(course).then(() => {
-      history.push('/courses');
-    });
+    if (Object.keys(errors).length > 0) return setStatus(STATUS.SUBMITTED);
+
+    setStatus(STATUS.SUBMITTING);
+
+    saveCourse(course)
+      .then(() => {
+        history.push('/courses');
+        toast.success('Course successfully saved');
+      })
+      .catch((err) => {
+        console.error('Failed to save course: "%s"', err.message);
+        toast.error('Failed saving course: ' + err.message, {
+          autoClose: false,
+        });
+        setStatus(STATUS.SUBMITTED);
+      });
+  }
+
+  // Utility functions
+
+  function getErrors(course) {
+    const result = {};
+    for (let [key, pattern] of Object.entries(patterns)) {
+      if (!pattern.test(course[key])) result[key] = 'invalid';
+      if (!course[key]) result[key] = 'empty';
+    }
+    return result;
+  }
+
+  function getErrorMessages({ title, authorId, category }) {
+    const result = {};
+
+    if (title === 'invalid')
+      result.title =
+        'Allowed characters are alphabetics, numbers, space and (#+-)';
+    if (title === 'empty') result.title = 'Title can not be empty.';
+
+    if (authorId === 'invalid') result.authorId = 'invalid author';
+    if (authorId === 'empty') result.authorId = 'Please select an author.';
+
+    if (category === 'invalid')
+      result.category =
+        'Allowed characters are alphabetics, numbers, space and (#+-)';
+    if (category === 'empty') result.category = 'Category can not be empty.';
+
+    return result;
+  }
+
+  function getTouchedInput(errorMessages) {
+    if (status === STATUS.SUBMITTED) return errorMessages;
+
+    return Object.entries(errorMessages).reduce((result, [input, error]) => {
+      if (touched[input] && error) result[input] = error;
+      return result;
+    }, {});
   }
 
   return (
@@ -70,9 +149,12 @@ function CourseManagementPage({
         <CourseForm
           course={course}
           authors={authors}
-          errors={errors}
+          errors={getTouchedInput(messages)}
+          touched={touched}
+          saving={status === STATUS.SUBMITTING}
           onChange={handleChange}
           onSubmit={handleSubmit}
+          onBlur={handleBlur}
         />
       )}
     </main>
