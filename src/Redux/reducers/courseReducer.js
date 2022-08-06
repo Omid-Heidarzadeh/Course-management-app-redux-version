@@ -13,7 +13,15 @@ export default function courseReducer(state = initalState.courses, action) {
       );
     }
 
+    case types.DELETE_COURSE_OPTIMISTIC: {
+      return state.filter((course) => course.id !== action.courseId);
+    }
+
     case types.LOAD_COURSES_SUCCESS: {
+      return action.courses;
+    }
+
+    case types.LOAD_COURSES_OPTIMISTIC: {
       return action.courses;
     }
 
