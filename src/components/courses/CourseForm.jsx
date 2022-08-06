@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
 import TextInput from '../common/Inputs/TextInput.jsx';
 import SelectInput from './../common/Inputs/SelectInput.jsx';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
 function CourseForm({
   course,
   authors,
   onChange,
   onSubmit,
+  onBlur,
   saving = false,
   errors = {},
 }) {
@@ -33,6 +34,7 @@ function CourseForm({
           name="title"
           value={course.title}
           onChange={onChange}
+          onBlur={onBlur}
           error={errors.title}
         />
 
@@ -51,7 +53,8 @@ function CourseForm({
           )}
           defaultOption={'select author'}
           onChange={onChange}
-          error={errors.author}
+          onBlur={onBlur}
+          error={errors.authorId}
         />
 
         <TextInput
@@ -60,6 +63,7 @@ function CourseForm({
           name="category"
           value={course.category}
           onChange={onChange}
+          onBlur={onBlur}
           error={errors.category}
         />
 
@@ -80,6 +84,7 @@ CourseForm.propTypes = {
   authors: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   saving: PropTypes.bool,
   errors: PropTypes.object,
 };
