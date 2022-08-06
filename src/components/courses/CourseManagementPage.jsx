@@ -67,8 +67,10 @@ function CourseManagementPage({
     setCourse(newCourse);
 
     const newErrors = getErrors(newCourse);
-    setErrors(() => {
+    setErrors((errors) => {
+      const onSave = errors.onSave;
       const result = { ...newErrors };
+      if (Object.keys(newErrors).length && onSave) result.onSave = onSave;
       return result;
     });
   }
@@ -76,8 +78,10 @@ function CourseManagementPage({
   function handleBlur(event) {
     const { name } = event.target;
     setTouched((touched) => ({ ...touched, [name]: true }));
-    setErrors(() => {
+    setErrors((errors) => {
+      const onSave = errors.onSave;
       const result = { ...getErrors(course) };
+      if (onSave) result.onSave = onSave;
       return result;
     });
   }
@@ -99,6 +103,7 @@ function CourseManagementPage({
           autoClose: false,
         });
         setStatus(STATUS.SUBMITTED);
+        setErrors((errors) => ({ ...errors, onSave: err.message }));
       });
   }
 
@@ -113,7 +118,7 @@ function CourseManagementPage({
     return result;
   }
 
-  function getErrorMessages({ title, authorId, category }) {
+  function getErrorMessages({ title, authorId, category, onSave }) {
     const result = {};
 
     if (title === 'invalid')
@@ -128,6 +133,8 @@ function CourseManagementPage({
       result.category =
         'Allowed characters are alphabetics, numbers, space and (#+-)';
     if (category === 'empty') result.category = 'Category can not be empty.';
+
+    if (onSave) result.onSave = onSave;
 
     return result;
   }

@@ -14,16 +14,12 @@ function CourseForm({
 }) {
   return (
     <>
-      {Object.keys(errors).length === 0 ? null : (
+      {errors.onSave ? (
         <div role="alert" className="text-danger">
-          <p>Fix following erros:</p>
-          <ul>
-            {Object.entries(errors).map(([key, value]) => (
-              <li key={key}>{value}</li>
-            ))}
-          </ul>
+          <p>Fix following error and try again:</p>
+          <p>{errors.onSave}</p>
         </div>
-      )}
+      ) : null}
 
       <h1>{course.id ? 'Edit' : 'Add'} Course</h1>
 
