@@ -10,8 +10,16 @@ function updateCourseSuccess(course) {
   return { type: types.UPDATE_COURSE_SUCCESS, course };
 }
 
+function deleteCourseOptimistic(courseId) {
+  return { type: types.DELETE_COURSE_OPTIMISTIC, courseId };
+}
+
 function loadCoursesSuccess(courses) {
   return { type: types.LOAD_COURSES_SUCCESS, courses };
+}
+
+function loadCoursesOptimistic(courses) {
+  return { type: types.LOAD_COURSES_OPTIMISTIC, courses };
 }
 
 export function saveCourse(course) {
@@ -29,6 +37,19 @@ export function saveCourse(course) {
         dispatch(apiCallError());
         throw err;
       });
+  };
+}
+
+export function deleteCourse(courseId) {
+  return function (dispatch, getState) {
+    const courses = getState().courses;
+
+    dispatch(deleteCourseOptimistic(courseId));
+
+    return courseApi.deleteCourse(courseId).catch((err) => {
+      dispatch(loadCoursesOptimistic(courses));
+      throw err;
+    });
   };
 }
 
