@@ -63,7 +63,11 @@ function CourseForm({
           error={errors.category}
         />
 
-        <button className="btn btn-primary btn-m" type="submit">
+        <button
+          className="btn btn-primary btn-m"
+          disabled={saving}
+          type="submit"
+        >
           {saving ? 'Saving...' : 'Save'}
         </button>
       </form>
