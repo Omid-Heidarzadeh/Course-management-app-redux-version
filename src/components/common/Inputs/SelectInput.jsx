@@ -32,7 +32,7 @@ function SelectInput(props) {
         onChange={onChange}
         onBlur={onBlur}
       >
-        <option value="">{defaultOption}</option>
+        <option value="0">{defaultOption}</option>
         {options.length &&
           options.map(({ value, name }, index) => (
             <option key={index} value={value}>
@@ -40,7 +40,9 @@ function SelectInput(props) {
             </option>
           ))}
       </select>
-      <span className="form-text text-danger pl-2">{error}</span>
+      <span id={`${id}-error`} className="form-text text-danger pl-2">
+        {error}
+      </span>
     </div>
   );
 }
