@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import Spinner from './../common/Spinner.jsx';
 import { toast } from 'react-toastify';
 
-function CoursesPage(props) {
+export function CoursesPage(props) {
   const { authors, courses, loadCourses, deleteCourse, loadAuthors, loading } =
     props;
 
