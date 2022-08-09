@@ -2,23 +2,23 @@ import * as types from './actionTypes';
 import * as courseApi from '../../api/courseApi';
 import { beginApiCall, apiCallError } from './apiStatusActions';
 
-function createCourseSuccess(course) {
+export function createCourseSuccess(course) {
   return { type: types.CREATE_COURSE_SUCCESS, course };
 }
 
-function updateCourseSuccess(course) {
+export function updateCourseSuccess(course) {
   return { type: types.UPDATE_COURSE_SUCCESS, course };
 }
 
-function deleteCourseOptimistic(courseId) {
+export function deleteCourseOptimistic(courseId) {
   return { type: types.DELETE_COURSE_OPTIMISTIC, courseId };
 }
 
-function loadCoursesSuccess(courses) {
+export function loadCoursesSuccess(courses) {
   return { type: types.LOAD_COURSES_SUCCESS, courses };
 }
 
-function loadCoursesOptimistic(courses) {
+export function loadCoursesOptimistic(courses) {
   return { type: types.LOAD_COURSES_OPTIMISTIC, courses };
 }
 
