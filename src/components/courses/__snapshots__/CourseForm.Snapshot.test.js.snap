@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render "save" label for the save button when saving is false 1`] = `
+Array [
+  <h1>
+    Edit
+     Course
+  </h1>,
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="control-label"
+        htmlFor="title"
+      >
+        Course Title
+      </label>
+      <input
+        className="form-control"
+        id="title"
+        name="title"
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        type="text"
+        value="Securing React Apps with Auth0"
+      />
+      <span
+        className="form-text text-danger pl-2"
+        id="title-error"
+      >
+        
+      </span>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="control-label"
+        htmlFor="author"
+      >
+        Author
+      </label>
+      <select
+        className="form-control"
+        id="author"
+        name="authorId"
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        value="1"
+      >
+        <option
+          value="0"
+        >
+          select author
+        </option>
+        <option
+          value="1"
+        >
+          Cory House
+        </option>
+        <option
+          value="2"
+        >
+          Scott Allen
+        </option>
+        <option
+          value="3"
+        >
+          Dan Wahlin
+        </option>
+      </select>
+      <span
+        className="form-text text-danger pl-2"
+        id="author-error"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="control-label"
+        htmlFor="category"
+      >
+        Category
+      </label>
+      <input
+        className="form-control"
+        id="category"
+        name="category"
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        type="text"
+        value="JavaScript"
+      />
+      <span
+        className="form-text text-danger pl-2"
+        id="category-error"
+      >
+        
+      </span>
+    </div>
+    <button
+      className="btn btn-primary btn-m"
+      disabled={false}
+      type="submit"
+    >
+      Save
+    </button>
+  </form>,
+]
+`;
+
+exports[`should render "saving..." label for the save button when saving is true 1`] = `
+Array [
+  <h1>
+    Edit
+     Course
+  </h1>,
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="control-label"
+        htmlFor="title"
+      >
+        Course Title
+      </label>
+      <input
+        className="form-control"
+        id="title"
+        name="title"
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        type="text"
+        value="Securing React Apps with Auth0"
+      />
+      <span
+        className="form-text text-danger pl-2"
+        id="title-error"
+      >
+        
+      </span>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="control-label"
+        htmlFor="author"
+      >
+        Author
+      </label>
+      <select
+        className="form-control"
+        id="author"
+        name="authorId"
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        value="1"
+      >
+        <option
+          value="0"
+        >
+          select author
+        </option>
+        <option
+          value="1"
+        >
+          Cory House
+        </option>
+        <option
+          value="2"
+        >
+          Scott Allen
+        </option>
+        <option
+          value="3"
+        >
+          Dan Wahlin
+        </option>
+      </select>
+      <span
+        className="form-text text-danger pl-2"
+        id="author-error"
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="control-label"
+        htmlFor="category"
+      >
+        Category
+      </label>
+      <input
+        className="form-control"
+        id="category"
+        name="category"
+        onBlur={[MockFunction]}
+        onChange={[MockFunction]}
+        type="text"
+        value="JavaScript"
+      />
+      <span
+        className="form-text text-danger pl-2"
+        id="category-error"
+      >
+        
+      </span>
+    </div>
+    <button
+      className="btn btn-primary btn-m"
+      disabled={true}
+      type="submit"
+    >
+      Saving...
+    </button>
+  </form>,
+]
+`;
