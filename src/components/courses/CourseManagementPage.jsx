@@ -20,7 +20,7 @@ const patterns = {
   category: /^[a-zA-Z0-9 ()#+-]{1,30}$/,
 };
 
-function CourseManagementPage({
+export function CourseManagementPage({
   courses,
   authors,
   loading,
@@ -113,7 +113,7 @@ function CourseManagementPage({
     const result = {};
     for (let [key, pattern] of Object.entries(patterns)) {
       if (!pattern.test(course[key])) result[key] = 'invalid';
-      if (!course[key]) result[key] = 'empty';
+      if (String(course[key]).trim().length === 0) result[key] = 'empty';
     }
     return result;
   }
@@ -124,15 +124,15 @@ function CourseManagementPage({
     if (title === 'invalid')
       result.title =
         'Allowed characters are alphabetics, numbers, space and (#+-)';
-    if (title === 'empty') result.title = 'Title can not be empty.';
+    if (title === 'empty') result.title = 'Title can not be empty';
 
-    if (authorId === 'invalid') result.authorId = 'invalid author';
-    if (authorId === 'empty') result.authorId = 'Please select an author.';
+    if (authorId === 'invalid') result.authorId = 'Please select an author';
+    // if (authorId === 'empty') result.authorId = 'Please select an author';
 
     if (category === 'invalid')
       result.category =
         'Allowed characters are alphabetics, numbers, space and (#+-)';
-    if (category === 'empty') result.category = 'Category can not be empty.';
+    if (category === 'empty') result.category = 'Category can not be empty';
 
     if (onSave) result.onSave = onSave;
 

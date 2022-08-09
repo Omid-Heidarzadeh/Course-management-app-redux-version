@@ -22,7 +22,9 @@ function TextInput(props) {
         onChange={onChange}
         onBlur={onBlur}
       />
-      <span className="form-text text-danger pl-2">{error}</span>
+      <span id={`${id}-error`} className="form-text text-danger pl-2">
+        {error}
+      </span>
     </div>
   );
 }

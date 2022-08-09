@@ -29,6 +29,7 @@ Array [
       />
       <span
         className="form-text text-danger pl-2"
+        id="title-error"
       >
         
       </span>
@@ -51,7 +52,7 @@ Array [
         value="1"
       >
         <option
-          value=""
+          value="0"
         >
           select author
         </option>
@@ -73,6 +74,7 @@ Array [
       </select>
       <span
         className="form-text text-danger pl-2"
+        id="author-error"
       />
     </div>
     <div
@@ -95,6 +97,7 @@ Array [
       />
       <span
         className="form-text text-danger pl-2"
+        id="category-error"
       >
         
       </span>
@@ -139,6 +142,7 @@ Array [
       />
       <span
         className="form-text text-danger pl-2"
+        id="title-error"
       >
         
       </span>
@@ -161,7 +165,7 @@ Array [
         value="1"
       >
         <option
-          value=""
+          value="0"
         >
           select author
         </option>
@@ -183,6 +187,7 @@ Array [
       </select>
       <span
         className="form-text text-danger pl-2"
+        id="author-error"
       />
     </div>
     <div
@@ -205,6 +210,7 @@ Array [
       />
       <span
         className="form-text text-danger pl-2"
+        id="category-error"
       >
         
       </span>
